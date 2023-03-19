@@ -589,6 +589,24 @@ export class Ui extends BaseUi<Params> {
 
       return ActionFlags.None;
     },
+    leaveFilterWindow: async (args: {
+      denops: Denops;
+      context: Context;
+      options: DduOptions;
+      uiParams: Params;
+    }) => {
+      const parentId = await vars.g.get(
+        args.denops,
+        "ddu#ui#ff#_filter_parent_winid",
+        -1,
+      );
+      if (parentId > 0) {
+        // Move to parent window
+        await fn.win_gotoid(args.denops, parentId);
+      }
+
+      return ActionFlags.None;
+    },
     expandItem: async (args: {
       denops: Denops;
       options: DduOptions;
